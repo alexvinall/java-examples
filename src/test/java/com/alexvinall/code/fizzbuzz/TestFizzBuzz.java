@@ -35,5 +35,6 @@ public class TestFizzBuzz {
 
       // Then
       assertThat(output.size(), is(ceiling));
+      // TODO implement proper output tests
     }
 }
