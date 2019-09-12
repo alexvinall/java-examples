@@ -1,7 +1,5 @@
 package com.alexvinall.code.palindrome;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Stack;
 
 
@@ -26,29 +24,34 @@ public class Palindrome {
    * @return true if the input string is a palindrome, otherwise false.
    */
   public boolean isPalindrome(String input) {
-    if (StringUtils.isBlank(input)) {
+    // Early return checks for null or zero-length input
+    if (input == null || input.length() == 0) {
       return true;
     }
 
-    // We'll create a stack of characters half as long as the overall string
-    int stackSize = input.length() % 2 == 0 ? input.length() / 2 : (input.length()+1) / 2;
+    // TODO sanitise input by removing punctuation and make case insensitive
 
+    // Create a Stack containing all the characters in the input so that we can reverse it.
     Stack<Character> charStack = new Stack<>();
+    for (int i = 0; i < input.length(); i++) {
+      charStack.push(input.charAt(i));
+    }
 
+    // Reverse the String
+    String reverse = "";
+    while(!charStack.isEmpty()) {
+      reverse = reverse + charStack.pop();
+    }
+
+    // Check if the String is the same backwards as forwards
     for (int i = 0 ; i < input.length() ; i++) {
-      if (i < stackSize) {
-        charStack.push(input.charAt(i));
-      }
-
-
-      // TODO fix this part
-      if (i >= stackSize - 1) {
-        if (!Character.valueOf(input.charAt(i)).equals(charStack.pop())) {
-          return false;
-        }
+      if (input.charAt(i) != reverse.charAt(i)) {
+        // If the characters do not match, the input is not a palindrome
+        return false;
       }
     }
 
+    // If we have reached here, the String must be a palindrome.
     return true;
   }
 }

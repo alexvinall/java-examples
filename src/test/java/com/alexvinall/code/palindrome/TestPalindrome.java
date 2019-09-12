@@ -30,7 +30,6 @@ public class TestPalindrome {
     assertTrue(palindrome.isPalindrome("racecar"));
   }
 
-
   @Test
   public void testNoon() {
     assertTrue(palindrome.isPalindrome("noon"));
